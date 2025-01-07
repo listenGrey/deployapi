@@ -14,8 +14,10 @@ func main() {
 	// Enable CORS for frontend-backend communication
 	r.Use(corsMiddleware())
 
+	v1 := r.Group("/api/v1")
 	// Define the API endpoint
-	r.POST("/api/process", controller.Handler)
+	v1.POST("/process", controller.Handler)
+	v1.GET("/m/:msg", controller.Hello)
 
 	// Start the server on port 8080
 	r.Run(":8080")
